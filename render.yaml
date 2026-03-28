@@ -1,0 +1,25 @@
+services:
+  - type: web
+    rootDirectory: _backend
+    name: agrismart-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    disk:
+      name: agrismart-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: DATABASE_PATH
+        value: /data/agrismart.db
+      - key: GROQ_API_KEY
+        fromContext: env
+      - key: FIREBASE_SERVICE_ACCOUNT
+        fromContext: env
+      - key: DATAGOV_API_KEY
+        fromContext: env
+      - key: DATAGOV_RESOURCE_ID
+        fromContext: env
